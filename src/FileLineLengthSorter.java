@@ -30,13 +30,17 @@ public class FileLineLengthSorter {
     try {
       File fileToSort = new File(args[1]);
       Scanner scan = new Scanner(fileToSort);
-      
+
       File fileToWrite = args[1].equals("-o") ? fileToSort
           : new File(args[1].substring(0, args[1].lastIndexOf(".")) + "(Sorted)"
               + args[1].substring(args[1].lastIndexOf(".")));
       PrintStream stream = new PrintStream(fileToWrite);
       System.setOut(stream);
 
+      for (int i = 0; i < ((args.length == 3) ? Integer.parseInt(args[2]) : -1); i++)
+        skippedlines.add(scan.nextLine());
+
+      
     } catch (FileNotFoundException e) {
       System.out.println("Please enter a valid file.");
       System.exit(1);
