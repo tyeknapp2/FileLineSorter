@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.awt.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -55,5 +56,23 @@ public class FileLineLengthSorter {
       return;
     }
 
+  }
+
+  private static ArrayList<String> mergeSort(List<String> in) {
+    if (in.size() == 1) {
+      return in;
+    }
+    int mid = in.size() / 2, ia = 0, ib = 0;
+    ArrayList<String> a = mergeSort(in.subList(0, mid)), b = mergeSort(in.subList(mid, in.size())),
+        sorted = new ArrayList<String>();
+    while (ia < a.size() || ib < b.size()) {
+      if (ib == b.size() || (ia != a.size() && (a.get(ia).length() < b.get(ib).length()
+          || (a.get(ia).length() == b.get(ib).length() && a.get(ia).compareTo(b.get(ib)) <= 0)))) {
+        sorted.add(a.get(ia++));
+      } else {
+        sorted.add(b.get(ib++));
+      }
+    }
+    return sorted;
   }
 }
