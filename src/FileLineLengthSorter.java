@@ -39,8 +39,10 @@ public class FileLineLengthSorter {
 
       for (int i = 0; i < ((args.length == 3) ? Integer.parseInt(args[2]) : -1); i++)
         skippedlines.add(scan.nextLine());
+      while (scan.hasNext()) {
+        linesToSort.add(scan.nextLine());
+      }
 
-      
     } catch (FileNotFoundException e) {
       System.out.println("Please enter a valid file.");
       System.exit(1);
