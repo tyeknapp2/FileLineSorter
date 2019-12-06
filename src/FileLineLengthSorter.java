@@ -51,7 +51,11 @@ public class FileLineLengthSorter {
         linesToSort.add(scan.nextLine());
 
       linesToSort = mergeSort(linesToSort);
-      
+
+      skippedLines.addAll(linesToSort);
+      for (String s : skippedLines)
+        System.out.println(s);
+
     } catch (FileNotFoundException e) {
       System.out.println("Please enter a valid file.");
       System.exit(1);
