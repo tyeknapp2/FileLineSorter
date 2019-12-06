@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.Collections;
 import java.util.ArrayList;
 
@@ -29,6 +30,13 @@ public class FileLineLengthSorter {
     try {
       File fileToSort = new File(args[1]);
       Scanner scan = new Scanner(fileToSort);
+      
+      File fileToWrite = args[1].equals("-o") ? fileToSort
+          : new File(args[1].substring(0, args[1].lastIndexOf(".")) + "(Sorted)"
+              + args[1].substring(args[1].lastIndexOf(".")));
+      PrintStream stream = new PrintStream(fileToWrite);
+      System.setOut(stream);
+
     } catch (FileNotFoundException e) {
       System.out.println("Please enter a valid file.");
       System.exit(1);
