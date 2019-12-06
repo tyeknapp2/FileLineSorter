@@ -37,11 +37,17 @@ public class FileLineLengthSorter {
       PrintStream stream = new PrintStream(fileToWrite);
       System.setOut(stream);
 
-      for (int i = 0; i < ((args.length == 3) ? Integer.parseInt(args[2]) : -1); i++)
+      for (int i = 0; i < ((args.length == 3) ? Integer.parseInt(args[2]) : -1); i++) {
         skippedlines.add(scan.nextLine());
-      while (scan.hasNext()) {
-        linesToSort.add(scan.nextLine());
+        if (!scan.hasNext()) {
+          for (String s : skippedLines)
+            System.out.println(s);
+          System.exit(0);
+          return;
+        }
       }
+      while (scan.hasNext())
+        linesToSort.add(scan.nextLine());
 
     } catch (FileNotFoundException e) {
       System.out.println("Please enter a valid file.");
