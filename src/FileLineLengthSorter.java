@@ -24,13 +24,16 @@ public class FileLineLengthSorter {
       return;
     }
 
+    ArrayList<String> skippedLines = new ArrayList<String>();
+    ArrayList<String> linesToSort = new ArrayList<String>();
     try {
       File fileToSort = new File(args[1]);
+      Scanner scan = new Scanner(fileToSort);
     } catch (FileNotFoundException e) {
       System.out.println("Please enter a valid file.");
       System.exit(1);
       return;
     }
-    
+
   }
 }
