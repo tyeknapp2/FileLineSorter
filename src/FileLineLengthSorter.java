@@ -50,6 +50,8 @@ public class FileLineLengthSorter {
       while (scan.hasNext())
         linesToSort.add(scan.nextLine());
 
+      scan.close();
+      
       linesToSort = mergeSort(linesToSort);
 
       skippedLines.addAll(linesToSort);
