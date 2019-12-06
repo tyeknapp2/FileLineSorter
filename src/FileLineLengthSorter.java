@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.ArrayList;
 
@@ -21,9 +22,15 @@ public class FileLineLengthSorter {
       System.out.println("Type:  $java FileLineLengthSorter -h [...]^  to bring up this screen");
       System.exit(0);
       return;
-    } 
+    }
 
+    try {
+      File fileToSort = new File(args[1]);
+    } catch (FileNotFoundException e) {
+      System.out.println("Please enter a valid file.");
+      System.exit(1);
+      return;
+    }
     
-
   }
 }
