@@ -8,8 +8,8 @@ import java.util.ArrayList;
  */
 public class FileLineLengthSorter {
   public static void main(String[] args) {
-    if (args.length == 0 || args[0].equals("-h")) {
-      System.out.println("   Proper usage:\t$ java FileLineLengthSorter [-n|-o] fullFilePath [numLinesSkipped]");
+    if (args.length <= 1 || args[0].equals("-h")) {
+      System.out.println("   Proper usage:\t$ java FileLineLengthSorter {-n|-o} fullFilePath [numLinesSkipped]");
       System.out.println(
           "----------------------------------------------------------------------------------------------------");
       System.out.println("\t     -n:\tCreate a new file in the same location with sorted appended to the file name");
@@ -21,7 +21,9 @@ public class FileLineLengthSorter {
       System.out.println("Type:  $java FileLineLengthSorter -h [...]^  to bring up this screen");
       System.exit(0);
       return;
-    }
+    } 
+
+    
 
   }
 }
