@@ -32,31 +32,30 @@ public class FileLineLengthSorter {
       File fileToSort = new File(args[1]);
       Scanner scan = new Scanner(fileToSort);
 
-      File fileToWrite = args[1].equals("-o") ? fileToSort
-          : new File(args[1].substring(0, args[1].lastIndexOf(".")) + "(Sorted)"
-              + args[1].substring(args[1].lastIndexOf(".")));
-      PrintStream stream = new PrintStream(fileToWrite);
-      System.setOut(stream);
-
       for (int i = 0; i < ((args.length == 3) ? Integer.parseInt(args[2]) : -1); i++) {
-        skippedlines.add(scan.nextLine());
+        skippedLines.add(scan.nextLine());
         if (!scan.hasNext()) {
-          for (String s : skippedLines)
-            System.out.println(s);
-          System.exit(0);
-          return;
+          break;
         }
       }
       while (scan.hasNext())
         linesToSort.add(scan.nextLine());
 
       scan.close();
-      
-      linesToSort = mergeSort(linesToSort);
+
+      linesToSort = linesToSort.size() > 0 ? mergeSort(linesToSort) : linesToSort;
 
       skippedLines.addAll(linesToSort);
+
+      File fileToWrite = args[0].equals("-o") ? fileToSort
+          : new File(args[1].substring(0, args[1].lastIndexOf(".")) + "(Sorted)"
+              + args[1].substring(args[1].lastIndexOf(".")));
+      PrintStream stream = new PrintStream(fileToWrite);
+      System.setOut(stream);
+
       for (String s : skippedLines)
         System.out.println(s);
+      System.exit(0);
 
     } catch (FileNotFoundException e) {
       System.out.println("Please enter a valid file.");
@@ -70,7 +69,8 @@ public class FileLineLengthSorter {
     if (in.size() == 1) {
       return in;
     }
-    int mid = in.size() / 2, ia = 0, ib = 0;
+    int mid = in.size() / 2;
+    int ia = 0, ib = 0;
     ArrayList<String> a = mergeSort(sublist(in, 0, mid)), b = mergeSort(sublist(in, mid, in.size())),
         sorted = new ArrayList<String>();
     while (ia < a.size() || ib < b.size()) {
