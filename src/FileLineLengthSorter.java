@@ -50,6 +50,8 @@ public class FileLineLengthSorter {
       while (scan.hasNext())
         linesToSort.add(scan.nextLine());
 
+      linesToSort = mergeSort(linesToSort);
+      
     } catch (FileNotFoundException e) {
       System.out.println("Please enter a valid file.");
       System.exit(1);
@@ -58,12 +60,12 @@ public class FileLineLengthSorter {
 
   }
 
-  private static ArrayList<String> mergeSort(List<String> in) {
+  private static ArrayList<String> mergeSort(ArrayList<String> in) {
     if (in.size() == 1) {
       return in;
     }
     int mid = in.size() / 2, ia = 0, ib = 0;
-    ArrayList<String> a = mergeSort(in.subList(0, mid)), b = mergeSort(in.subList(mid, in.size())),
+    ArrayList<String> a = mergeSort(sublist(in, 0, mid)), b = mergeSort(sublist(in, mid, in.size())),
         sorted = new ArrayList<String>();
     while (ia < a.size() || ib < b.size()) {
       if (ib == b.size() || (ia != a.size() && (a.get(ia).length() < b.get(ib).length()
@@ -74,5 +76,13 @@ public class FileLineLengthSorter {
       }
     }
     return sorted;
+  }
+
+  private static ArrayList<String> sublist(ArrayList<String> in, int start, int end) {
+    ArrayList<String> s = new ArrayList<String>();
+    for (int i = start; i < end; i++) {
+      s.add(in.get(i));
+    }
+    return s;
   }
 }
